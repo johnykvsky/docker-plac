@@ -1,0 +1,11 @@
+name: plac-apache
+
+services:
+  web:
+    container_name: plac-apache
+    build: .
+    image: plac-apache:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html

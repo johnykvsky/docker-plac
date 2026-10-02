@@ -1,0 +1,22 @@
+name: plac-nginx
+
+services:
+  plac-php:
+    container_name: plac-php
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    image: plac-php:latest
+    volumes:
+      - ./www:/var/www/html
+  plac-nginx:
+    container_name: plac-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    image: plac-nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro

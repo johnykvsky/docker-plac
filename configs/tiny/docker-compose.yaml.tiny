@@ -1,0 +1,15 @@
+name: plac-tiny
+
+services:
+  php:
+    container_name: plac-php-tiny
+    build: .
+    image: plac-php-tiny:latest
+    working_dir: /app
+    volumes:
+      - ./www:/app
+      # For SELinux distros (Fedora/RHEL/CentOS), use this instead:
+      # - ./www:/app:Z
+    command: php -S 0.0.0.0:8000
+    ports:
+      - "80:8000"

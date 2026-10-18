@@ -33,4 +33,6 @@ A lightweight local Docker setup for serving PHP applications on port `80`.
 
 3. Open [http://localhost](http://localhost) in your browser.
 
-> **Note:** All configurations bind to host port `80`. Make sure to stop any running configuration before starting another.
+> **Note:**
+> - All configurations bind to host port `80`. Make sure to stop any running configuration before starting another.
+> - The `docker-*.sh` helper scripts use `docker run --rm`, which automatically removes the container instance when you stop it (`Ctrl+C`) to prevent container name conflicts. This **only** removes the temporary container instance—downloaded Docker images (like `php:8.4-cli-alpine`) remain cached locally and are not re-downloaded on subsequent runs (unless you run [`scripts/prune_all.sh`](scripts/prune_all.sh)).

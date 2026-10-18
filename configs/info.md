@@ -152,7 +152,7 @@ Contains:
 - `docker-mini.sh`
 - `www/`
 
-This setup directly runs the lightweight `php:8.4-cli-alpine` image without any build step or compose overhead.
+This setup directly runs the lightweight `php:8.4-cli-alpine` image without any build step or compose overhead. Once pulled on the first run, `php:8.4-cli-alpine` stays cached locally—subsequent runs reuse the local image without downloading it again.
 
 Run with the helper script:
 
@@ -175,8 +175,11 @@ cd configs/mini
 
 - Run commands from inside the selected config folder so the relative `./www`
   mount points resolve correctly.
-- Stop and remove an existing container before starting another config if they
-  use the same port or container name.
+- The `docker-*.sh` scripts run containers with `--rm`, so the container
+  instance is automatically removed when stopped (`Ctrl+C`). This only removes
+  the temporary container; the underlying Docker images remain cached locally
+  and will not be re-downloaded on future runs.
+- Stop any running container before starting another config on port `80`.
 - On SELinux-enabled systems, use the `:Z` volume label variant shown in the
   small, tiny, and mini config/script comments.
 
